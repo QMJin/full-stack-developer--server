@@ -1,5 +1,6 @@
-import posts from "./tuits.js";
-let tuits = posts;
+import * as tuitsDao from "../tuits/tuits-dao.js";
+/*import posts from "./tuits.js";
+let tuits = posts;*/
 
 const TuitsController = (app) => {
   app.get('/api/tuits', findTuit);
@@ -8,29 +9,35 @@ const TuitsController = (app) => {
   app.put('/api/tuits/:tid', updateTuit);
 }
 
-const findTuit = (req, res) => {
-  res.send(tuits)
+const findTuit = async (req, res) => {
+  const tuits = await tuitsDao.findTuits()
+  res.json(tuits);
+  /*res.send(tuits)*/
   /*setTimeout(() => res.send(tuits), 2000);*/
 }
 
-const createTuit = (req, res) => {
+const createTuit = async (req, res) => {
   const newTuit = req.body;
-  newTuit._id = (new Date()).getTime() + '';
+  /*newTuit._id = (new Date()).getTime() + '';*/
   newTuit.likes = 0;
-  tuits.push(newTuit);
-  res.send(newTuit);
+  newTuit.liked = false;
+  /*tuits.push(newTuit);*/
+  const insertedTuit = await tuitsDao.createTuit(newTuit)
+  res.send(insertedTuit);
 }
 
-const deleteTuit = (req, res) => {
+const deleteTuit = async (req, res) => {
   const tuitIdToDelete = req.params['tid'];
-  tuits = tuits.filter(t => t._id !== tuitIdToDelete);
-  res.sendStatus(200);
+  const status = await tuitsDao.deleteTuit(tuitIdToDelete);
+  /*tuits = tuits.filter(t => t._id !== tuitIdToDelete);*/
+  /*res.sendStatus(200);*/
+  res.json(status);
 }
 
-const updateTuit = (req, res) => {
-  const tuitUpdates = req.body;
-  const tid = req.params['tid'];
-  const tuitIndex = tuits.findIndex(t => t._id === tid)
+const updateTuit = async (req, res) => {
+  const updates = req.body;
+  const tuitIdToUpdate = req.params['tid'];
+ /* const tuitIndex = tuits.findIndex(t => t._id === tid)
   if (tuitIndex >= 0) {
     tuits[tuitIndex] ={
       ...tuits[tuitIndex],
@@ -39,7 +46,9 @@ const updateTuit = (req, res) => {
     res.send(tuits[tuitIndex])
   } else {
     res.sendStatus(404);
-  }
+  }*/
+  const status = await tuitsDao.updateTuit(tuitIdToUpdate,updates);
+  res.json(status);
 }
 
 export default TuitsController;
