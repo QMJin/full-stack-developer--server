@@ -13,6 +13,7 @@ mongoose.connect( 'mongodb://localhost:27017/tuiter'
   ||'mongodb+srv://szjqm31:Myjsy@cluster0.s4bkpye.mongodb.net/?retryWrites=true&w=majority', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
+  family: 4
 })
 
 const app = express();
