@@ -9,7 +9,7 @@ import TuitsController from "./controllers/tuits/tuits-controller.js";
 /*const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/tuiter'
 mongoose.connect(CONNECTION_STRING);*/
 
-mongoose.connect( 'mongodb://localhost:27017/tuiter'
+mongoose.connect( 'mongodb://0.0.0.0:27017/tuiter'
   ||'mongodb+srv://szjqm31:Myjsy@cluster0.s4bkpye.mongodb.net/?retryWrites=true&w=majority', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
