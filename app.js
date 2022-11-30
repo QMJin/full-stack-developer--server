@@ -17,15 +17,15 @@ const options = {
 
 /*mongoose.connect('mongodb://localhost:27017/tuiter')*/
 
-/*const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/tuiter'
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/tuiter'
 mongoose.connect(CONNECTION_STRING)
 .then(db => console.log('DB is connected'))
-.catch(err => console.log(err));*/
+.catch(err => console.log(err));
 
-mongoose.connect( 'mongodb://localhost:27017/tuiter'
+/*mongoose.connect( 'mongodb://localhost:27017/tuiter'
     || 'mongodb+srv://szjqm31:Myjsy@cluster0.s4bkpye.mongodb.net/?retryWrites=true&w=majority',options)
 .then(db => console.log('DB is connected'))
-.catch(err => console.log(err));
+.catch(err => console.log(err));*/
 
 const app = express();
 app.use(cors());
