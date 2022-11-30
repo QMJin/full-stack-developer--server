@@ -16,23 +16,20 @@ const options = {
 }
 
 /*mongoose.connect('mongodb://localhost:27017/tuiter')*/
+
 /*const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/tuiter'
-mongoose.connect(CONNECTION_STRING);*/
+mongoose.connect(CONNECTION_STRING)
+.then(db => console.log('DB is connected'))
+.catch(err => console.log(err));*/
 
 mongoose.connect( 'mongodb://localhost:27017/tuiter'
-  || 'mongodb+srv://szjqm31:Myjsy@cluster0.s4bkpye.mongodb.net/?retryWrites=true&w=majority', options)
+    || 'mongodb+srv://szjqm31:Myjsy@cluster0.s4bkpye.mongodb.net/?retryWrites=true&w=majority',options)
 .then(db => console.log('DB is connected'))
 .catch(err => console.log(err));
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(session({
-  store: new MongoStore({
-    url: 'mongodb://localhost:27017/tuiter'
-        || 'mongodb+srv://szjqm31:Myjsy@cluster0.s4bkpye.mongodb.net/?retryWrites=true&w=majority'
-  })
-}))
 
 TuitsController(app);
 HelloController(app);
