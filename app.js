@@ -27,6 +27,12 @@ mongoose.connect( 'mongodb://localhost:27017/tuiter'
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(session({
+  store: new MongoStore({
+    url: 'mongodb://localhost:27017/tuiter'
+        || 'mongodb+srv://szjqm31:Myjsy@cluster0.s4bkpye.mongodb.net/?retryWrites=true&w=majority'
+  })
+}))
 
 TuitsController(app);
 HelloController(app);
